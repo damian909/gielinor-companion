@@ -139,6 +139,12 @@ Diary task names are generated from [Quest Helper](https://github.com/Zoinkwiz/q
 - Farming timers are per patch type (via RuneLite's Time Tracking), not per individual patch.
 - Personal bests only include times RuneLite has seen in chat.
 
+## ☕ Support
+
+Gielinor Companion is free and open source. If it helps your account, you can support its development on Ko-fi — thank you!
+
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20development-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/damian909)
+
 ## License
 
 [BSD 2-Clause](LICENSE). Not affiliated with Jagex, RuneLite, Anthropic or the OSRS Wiki.
