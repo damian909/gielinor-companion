@@ -16,6 +16,10 @@ checked against the OSRS Wiki, with routes drawn straight onto your in-game map.
 
 </div>
 
+https://github.com/user-attachments/assets/91a3737c-7e15-48ff-9e28-d27cceaad817
+
+<p align="center"><sub>🎬 Launch video made with <a href="https://github.com/latent-spaces/brag"><code>/brag</code></a>, my favorite part of vibecoding.</sub></p>
+
 ---
 
 ## Why?
