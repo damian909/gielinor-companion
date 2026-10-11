@@ -141,8 +141,9 @@ Diary task names are generated from [Quest Helper](https://github.com/Zoinkwiz/q
 
 ## ☕ Support
 
-Gielinor Companion is free and open source. If it helps your account, you can support its development on Ko-fi — thank you!
+Gielinor Companion is free and open source. If it helps your account, you can support its development — thank you!
 
+[![Sponsor on GitHub](https://img.shields.io/badge/GitHub%20Sponsors-Sponsor-EA4AAA?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/damian909)
 [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20development-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/damian909)
 
 ## License
