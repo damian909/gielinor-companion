@@ -141,12 +141,12 @@ Diary task names are generated from [Quest Helper](https://github.com/Zoinkwiz/q
 - Farming timers are per patch type (via RuneLite's Time Tracking), not per individual patch.
 - Personal bests only include times RuneLite has seen in chat.
 
-## ☕ Support
+## 🍺 Buy me a beer
 
-Gielinor Companion is free and open source. If it helps your account, you can support its development — thank you!
+Gielinor Companion is free and open source. If it saved you a few hours of wiki tabs, feel free to buy me a beer, a coffee, some food or a bond. It's a thank-you, not a subscription: no promises of new features or updates. Cheers!
 
-[![Sponsor on GitHub](https://img.shields.io/badge/GitHub%20Sponsors-Sponsor-EA4AAA?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/damian909)
-[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20development-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/damian909)
+[![Sponsor on GitHub](https://img.shields.io/badge/GitHub%20Sponsors-Buy%20me%20a%20beer-EA4AAA?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/damian909)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Buy%20me%20a%20coffee-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/damian909)
 
 ## License
 
