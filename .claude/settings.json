@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(~/.runelite/credentials.properties)",
+      "Edit(~/.runelite/credentials.properties)",
+      "Read(**/credentials.properties)",
+      "Read(~/.runelite/profiles2/**)",
+      "Read(~/.runelite/session)"
+    ]
+  }
+}

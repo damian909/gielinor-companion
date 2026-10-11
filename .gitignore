@@ -1,0 +1,22 @@
+# secrets / account data (never commit)
+credentials.properties
+*.sqlite
+*.sqlite-*
+.gielinor-companion/
+account-data-exporter/
+
+# node
+node_modules/
+dist/
+*.log
+
+# java / gradle (future plugin)
+build/
+.gradle/
+out/
+.idea/
+*.iml
+
+# os
+Thumbs.db
+.DS_Store

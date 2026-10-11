@@ -1,0 +1,28 @@
+{
+  "name": "gielinor-companion-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local MCP server: your OSRS account (RuneLite export) + the OSRS Wiki, for Claude",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@joplin/turndown-plugin-gfm": "^1.0.68",
+    "@modelcontextprotocol/server": "^2.3.1",
+    "node-html-parser": "^9.0.4",
+    "turndown": "^7.2.4",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/turndown": "^5.0.6",
+    "typescript": "^7.0.2"
+  },
+  "scripts": {
+    "start": "node src/index.ts",
+    "check": "tsc -p .",
+    "smoke": "node test/smoke.ts"
+  }
+}
