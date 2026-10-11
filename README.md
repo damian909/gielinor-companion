@@ -80,6 +80,8 @@ More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## 🚀 Setup (Windows)
 
+> 💡 **Easiest way:** give Claude Code the link to this repository (`https://github.com/damian909/gielinor-companion`) and ask it to set Gielinor Companion up for you. It can follow the steps below and will tell you the few things only you can do, like the in-game login.
+
 **You need:** [RuneLite](https://runelite.net), [Node.js 24+](https://nodejs.org), a Java 17 JDK (e.g. [Temurin](https://adoptium.net/temurin/releases/?version=17)), and [Claude Desktop](https://claude.ai/download) and/or Claude Code. Optional: the **Shortest Path** plugin from the RuneLite Plugin Hub for map routes.
 
 1. **Get the code and install the server's dependencies**
