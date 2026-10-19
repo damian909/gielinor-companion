@@ -44,7 +44,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 )
 public class CompanionExporterPlugin extends Plugin
 {
-	static final String VERSION = "0.7.0";
+	static final String VERSION = "0.8.0";
 
 	/** Wait a few ticks after login so varps and containers are populated. */
 	private static final int LOGIN_DELAY_TICKS = 5;
@@ -79,6 +79,10 @@ public class CompanionExporterPlugin extends Plugin
 	private int ticksSinceQuestCheck;
 	private int ticksSinceFarming;
 	private boolean questsMaybeChanged;
+	private boolean toolsChanged;
+	/** Last costume room contents written, so an open interface is only re-written when it changes. */
+	private Map<Integer, Integer> lastCostumeItems;
+	private String lastCostumeFile;
 	private AccountKey account;
 	/** Collection log counts seen since the last flush; null if none. */
 	private Map<Integer, Integer> pendingClog;
@@ -155,6 +159,7 @@ public class CompanionExporterPlugin extends Plugin
 			}
 			// First full snapshot of this session.
 			dirty.addAll(EnumSet.allOf(Category.class));
+			toolsChanged = true;
 			captureLive(TrackedContainer.INVENTORY);
 			captureLive(TrackedContainer.EQUIPMENT);
 			flush();
@@ -174,6 +179,7 @@ public class CompanionExporterPlugin extends Plugin
 		{
 			dirty.add(Category.QUESTS);
 		}
+		captureCostumeRoom();
 		if (++ticksSinceFlush >= FLUSH_INTERVAL_TICKS)
 		{
 			flush();
@@ -231,6 +237,10 @@ public class CompanionExporterPlugin extends Plugin
 		if (varp == VarPlayerID.COLLECTION_COUNT || varbit == VarbitID.IRONMAN)
 		{
 			dirty.add(Category.ACCOUNT);
+		}
+		if (ToolLeprechaun.isToolVarbit(varbit))
+		{
+			toolsChanged = true;
 		}
 	}
 
@@ -322,6 +332,25 @@ public class CompanionExporterPlugin extends Plugin
 		addClogItems(Map.of(id, 1));
 	}
 
+	/** Costume room furniture is only readable while its interface is open; write it when it changes. */
+	private void captureCostumeRoom()
+	{
+		CostumeRoom.Snapshot room = CostumeRoom.read(client);
+		if (room == null)
+		{
+			lastCostumeFile = null;
+			lastCostumeItems = null;
+			return;
+		}
+		if (room.fileName.equals(lastCostumeFile) && room.items.equals(lastCostumeItems))
+		{
+			return;
+		}
+		lastCostumeFile = room.fileName;
+		lastCostumeItems = room.items;
+		writer.writeContainer(account, room.fileName, snapshots.storage(room.fileName, room.items));
+	}
+
 	private void captureCollectionLog(ItemContainer transmit)
 	{
 		if (account != null)
@@ -351,6 +380,7 @@ public class CompanionExporterPlugin extends Plugin
 		ticksSinceHeartbeat = 0;
 		ticksSinceQuestCheck = 0;
 		questsMaybeChanged = false;
+		toolsChanged = false;
 		account = null;
 		dirty.clear();
 		pendingContainers.clear();
@@ -428,6 +458,11 @@ public class CompanionExporterPlugin extends Plugin
 		}
 		dirty.clear();
 		writeContainers();
+		if (toolsChanged)
+		{
+			writer.writeContainer(account, ToolLeprechaun.FILE_NAME, snapshots.toolLeprechaun());
+			toolsChanged = false;
+		}
 		if (pendingClog != null)
 		{
 			int obtainedCount = client.getVarpValue(VarPlayerID.COLLECTION_COUNT);
