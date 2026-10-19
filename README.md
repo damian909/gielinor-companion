@@ -58,7 +58,7 @@ hardcore safety, ultimate-ironman banking), so it won't tell an iron to "just bu
 | 🏆 | **Collection log** — progress per tab and page, missing items with drop sources and rates; new items saved the moment you get them | *"What am I missing from Wintertodt?"* |
 | 💀 | **Boss kill counts & PBs** — exact counts straight from the game (including the low ones the hiscores skip) and personal-best times | *"What are my boss kill counts?"* |
 | ⚔️ | **Combat achievements** — progress per tier and remaining tasks by boss or tier | *"Which easy combat achievements are left?"* |
-| 🎒 | **Item search** — bank, inventory, gear, seed vault, looting bag, kits and Sailing cargo holds, with GE and high-alch values | *"Do I have a dramen staff?"* · *"What's worth alching in my bank?"* |
+| 🎒 | **Item search** — bank, inventory, gear, seed vault, looting bag, kits, tool leprechaun, house costume room and Sailing cargo holds, with GE and high-alch values | *"Do I have a dramen staff?"* · *"What's worth alching in my bank?"* |
 | 🌱 | **Farming timers** — when your herbs, trees, allotments and bird houses are ready | *"Are my herbs ready?"* |
 | 🧪 | **Slayer** — current task, master, points and streak | *"What's my slayer task?"* |
 | 🧭 | **Map routes** — draws a walking route to any NPC, place or coordinate on your in-game map via the [Shortest Path](https://github.com/Skretzo/shortest-path) plugin; you walk it yourself | *"Show me the way to the Fishing Guild"* |

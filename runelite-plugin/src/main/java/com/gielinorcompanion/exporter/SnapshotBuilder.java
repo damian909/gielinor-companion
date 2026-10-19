@@ -321,8 +321,6 @@ class SnapshotBuilder
 	Map<String, Object> container(ItemContainer container, TrackedContainer which)
 	{
 		List<Map<String, Object>> items = new ArrayList<>();
-		long geTotal = 0;
-		long haTotal = 0;
 		Item[] contents = container.getItems();
 		for (int slot = 0; slot < contents.length; slot++)
 		{
@@ -336,28 +334,61 @@ class SnapshotBuilder
 			{
 				continue; // bank placeholder, not a real item
 			}
-			int canonical = itemManager.canonicalize(item.getId());
-			long gePrice = itemManager.getItemPrice(canonical);
-			int haPrice = itemManager.getItemComposition(canonical).getHaPrice();
-			geTotal += gePrice * item.getQuantity();
-			haTotal += (long) haPrice * item.getQuantity();
-
-			Map<String, Object> e = new LinkedHashMap<>();
-			e.put("slot", slot);
+			Map<String, Object> e = itemEntry(slot, item.getId(), item.getQuantity(), comp);
 			if (which == TrackedContainer.EQUIPMENT)
 			{
 				e.put("equipmentSlot", equipmentSlotName(slot));
 			}
-			e.put("id", item.getId());
-			e.put("name", CollectionLog.itemName(comp));
-			e.put("quantity", item.getQuantity());
-			e.put("noted", comp.getNote() != -1);
-			e.put("gePrice", gePrice);
-			e.put("haPrice", haPrice);
 			items.add(e);
 		}
+		return containerSnapshot(which.fileName, items);
+	}
+
+	/** Tool leprechaun storage in the same shape as an item container. */
+	Map<String, Object> toolLeprechaun()
+	{
+		Map<String, Object> m = storage(ToolLeprechaun.FILE_NAME, ToolLeprechaun.contents(client));
+		m.put("raw", ToolLeprechaun.raw(client));
+		return m;
+	}
+
+	/** Storage that is not a real item container (tool leprechaun, costume room), as one. */
+	Map<String, Object> storage(String name, Map<Integer, Integer> contents)
+	{
+		List<Map<String, Object>> items = new ArrayList<>();
+		for (Map.Entry<Integer, Integer> e : contents.entrySet())
+		{
+			items.add(itemEntry(items.size(), e.getKey(), e.getValue(), itemManager.getItemComposition(e.getKey())));
+		}
+		return containerSnapshot(name, items);
+	}
+
+	private Map<String, Object> itemEntry(int slot, int itemId, int quantity, ItemComposition comp)
+	{
+		int canonical = itemManager.canonicalize(itemId);
+		Map<String, Object> e = new LinkedHashMap<>();
+		e.put("slot", slot);
+		e.put("id", itemId);
+		e.put("name", CollectionLog.itemName(comp));
+		e.put("quantity", quantity);
+		e.put("noted", comp.getNote() != -1);
+		e.put("gePrice", (long) itemManager.getItemPrice(canonical));
+		e.put("haPrice", itemManager.getItemComposition(canonical).getHaPrice());
+		return e;
+	}
+
+	private static Map<String, Object> containerSnapshot(String name, List<Map<String, Object>> items)
+	{
+		long geTotal = 0;
+		long haTotal = 0;
+		for (Map<String, Object> e : items)
+		{
+			int quantity = (Integer) e.get("quantity");
+			geTotal += (Long) e.get("gePrice") * quantity;
+			haTotal += (long) (Integer) e.get("haPrice") * quantity;
+		}
 		Map<String, Object> m = new LinkedHashMap<>();
-		m.put("container", which.fileName);
+		m.put("container", name);
 		m.put("itemCount", items.size());
 		m.put("geValue", geTotal);
 		m.put("haValue", haTotal);

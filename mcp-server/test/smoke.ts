@@ -42,6 +42,12 @@ write(path.join(acc, 'containers', 'bank.json'), env('container', { container: '
   { slot: 1, id: 385, name: 'Shark', quantity: 300, noted: false, gePrice: 900, haPrice: 120 },
   { slot: 2, id: 560, name: 'Death rune', quantity: 5000, noted: false, gePrice: 180, haPrice: 108 },
 ] }));
+write(path.join(acc, 'containers', 'poh_armour_case.json'), env('container', { container: 'poh_armour_case', itemCount: 1, geValue: 0, haValue: 0, items: [
+  { slot: 0, id: 7956, name: 'Rune platelegs', quantity: 1, noted: false, gePrice: 38000, haPrice: 38000 },
+] }));
+write(path.join(acc, 'containers', 'tool_leprechaun.json'), env('container', { container: 'tool_leprechaun', itemCount: 1, geValue: 0, haValue: 0, items: [
+  { slot: 0, id: 1925, name: 'Bucket', quantity: 120, noted: false, gePrice: 5, haPrice: 1 },
+], raw: { buckets: 24, extraBuckets: 3 } }));
 
 write(path.join(acc, 'collection_log.json'), env('collection_log', {
   obtainedCount: 3, totalSlots: 1717, knownObtained: 2, lastCompleteCaptureAt: null, updatedAt: now,
@@ -92,6 +98,7 @@ const calls: [string, Record<string, unknown>][] = [
   ['get_account_summary', {}],
   ['get_skills', { skills: ['Agility', 'Firemaking'] }],
   ['find_items', { query: 'rune' }],
+  ['find_items', { containers: ['tool_leprechaun', 'poh_armour_case'] }],
   ['get_quests', {}],
   ['get_achievement_diaries', {}],
   ['get_achievement_diaries', { region: 'Varrock', tier: 'medium' }],

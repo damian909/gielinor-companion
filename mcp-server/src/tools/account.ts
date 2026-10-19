@@ -163,18 +163,25 @@ export function registerAccountTools(server: McpServer): void {
     }),
   );
 
-  const CONTAINER_NAMES = ['bank', 'inventory', 'equipment', 'seed_vault', 'looting_bag', 'seed_box', 'tackle_box', 'forestry_kit', 'huntsmans_kit', 'boat_1_cargo', 'boat_2_cargo', 'boat_3_cargo', 'boat_4_cargo', 'boat_5_cargo'] as const;
+  const CONTAINER_NAMES = [
+    'bank', 'inventory', 'equipment', 'seed_vault', 'looting_bag', 'seed_box', 'tackle_box', 'forestry_kit', 'huntsmans_kit', 'tool_leprechaun',
+    'boat_1_cargo', 'boat_2_cargo', 'boat_3_cargo', 'boat_4_cargo', 'boat_5_cargo',
+    'poh_armour_case', 'poh_magic_wardrobe', 'poh_fancy_dress_box', 'poh_treasure_chest', 'poh_toy_box', 'poh_cape_rack',
+  ] as const;
 
   server.registerTool(
     'find_items',
     {
       title: 'Find items',
       description:
-        "Search the player's items across bank, inventory, worn equipment and other storage (seed vault, looting bag, kits, boat cargo). Without a query it lists the most valuable stacks. Storage is only as fresh as the last time it was opened in-game; each container's capture time is shown.",
+        "Search the player's items across bank, inventory, worn equipment and other storage (seed vault, looting bag, kits, tool leprechaun, boat cargo, house costume room as poh_*). Without a query it lists the most valuable stacks. Storage is only as fresh as the last time it was opened in-game (the tool leprechaun updates on its own); each container's capture time is shown. Steel key ring and Kharedst's memoirs pages are not visible to the exporter.",
       inputSchema: z.object({
         rsn: rsnArg,
         query: z.string().max(60).optional().describe('Case-insensitive part of the item name, e.g. "rune" or "shark".'),
-        containers: z.array(z.enum(CONTAINER_NAMES)).optional().describe('Limit to these containers. Omit for all.'),
+        containers: z
+          .array(z.string().regex(/^[a-z0-9_]{1,64}$/))
+          .optional()
+          .describe(`Limit to these containers. Omit for all. Known: ${CONTAINER_NAMES.join(', ')}; costume room furniture is poh_<furniture name> (e.g. a treasure chest tier may get its own poh_treasure_chest_* name).`),
         sort: z.enum(['value', 'name', 'quantity']).default('value'),
         limit: z.number().int().min(1).max(100).default(25),
         cursor: z.string().optional().describe('Pagination cursor from a previous call.'),

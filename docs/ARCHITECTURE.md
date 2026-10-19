@@ -35,7 +35,10 @@ accounts/<key>/slayer.json                   task, amount, master, points, strea
 accounts/<key>/kills.json                    boss kill counts, activity scores, personal bests
 accounts/<key>/farming.json                  per patch type state + ready time, bird houses
 accounts/<key>/collection_log.json           obtained items (merged over time) + log layout
-accounts/<key>/containers/<name>.json        bank, inventory, equipment, seed vault, looting bag, kits, boat cargo
+accounts/<key>/containers/<name>.json        bank, inventory, equipment, seed vault, looting bag, kits, boat cargo,
+                                             costume room furniture (poh_*, read from its interface while open:
+                                             the game does not send it as an item container),
+                                             tool_leprechaun (decoded from farming tool varbits, plus raw values)
 requests/route.json, route-status.json       map route request from the server, and the plugin's acknowledgement
 ```
 Every file is an envelope: `{schemaVersion, pluginVersion, category, accountHash, profileType, rsn, capturedAt, data}`. Different game modes (Leagues, Deadman, …) are separate accounts.
